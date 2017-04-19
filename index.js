@@ -4,7 +4,7 @@ const _ = require('underscore');
 const fs = require('fs');
 const ArgumentParser = require('argparse').ArgumentParser; 
 const EntityTable = require('./lib/EntityTable');
-const EventParser = require('./lib/EventParser');
+const ActivityParser = require('./lib/ActivityParser');
 const Simulation = require('./lib/Simulation');
 
 var argParser = new ArgumentParser({
@@ -45,7 +45,7 @@ console.log('input file: ' + inputFileBuffer.toString());
 
 var foodEntityTable = EntityTable.FoodTable(foodFileBuffer);
 var exerciseEntityTable = EntityTable.ExerciseTable(exerciseFileBuffer);
-var inputArray = EventParser(inputFileBuffer);
+var inputArray = ActivityParser(inputFileBuffer);
 console.log('food table: ' + foodEntityTable.name);
 _.each(foodEntityTable.entities, function(value, key) {
   console.log(value.name + ': ' + key + ', ' + value.value + ', ' + value.duration);
