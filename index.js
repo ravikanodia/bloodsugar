@@ -5,6 +5,7 @@ const fs = require('fs');
 const ArgumentParser = require('argparse').ArgumentParser; 
 const EntityTable = require('./lib/EntityTable');
 const EventParser = require('./lib/EventParser');
+const Simulation = require('./lib/Simulation');
 
 var argParser = new ArgumentParser({
     version: '0.0.0',
@@ -58,3 +59,5 @@ _.each(inputArray, function(value) {
   console.log(new Date(value.timestamp) + ": " + value.type + ", " + value.id);
 });
 
+var simulation = Simulation(foodEntityTable, exerciseEntityTable, inputArray);
+simulation.runSimulation();
