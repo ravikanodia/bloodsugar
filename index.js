@@ -1,10 +1,10 @@
 'use strict';
 
+const _ = require('underscore');
 const fs = require('fs');
 const ArgumentParser = require('argparse').ArgumentParser; 
 const EntityTable = require('./lib/EntityTable');
 const EventParser = require('./lib/EventParser');
-const _ = require('underscore');
 
 var argParser = new ArgumentParser({
     version: '0.0.0',
