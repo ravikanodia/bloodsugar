@@ -1,6 +1,5 @@
 'use strict';
 
-const _ = require('underscore');
 const fs = require('fs');
 const ArgumentParser = require('argparse').ArgumentParser; 
 const EntityTable = require('./lib/EntityTable');
@@ -35,29 +34,9 @@ var args = argParser.parseArgs();
 
 // readFileSync is not very node-y, but these files are very small and they
 // are required before any work can be done. Async methods are overkill here.
-var foodFileBuffer = fs.readFileSync(args.food);
-var exerciseFileBuffer = fs.readFileSync(args.exercise);
-var inputFileBuffer = fs.readFileSync(args.input);
-
-console.log('food file: ' + foodFileBuffer.toString());
-console.log('exercise file: ' + exerciseFileBuffer.toString());
-console.log('input file: ' + inputFileBuffer.toString());
-
-var foodEntityTable = EntityTable.FoodTable(foodFileBuffer);
-var exerciseEntityTable = EntityTable.ExerciseTable(exerciseFileBuffer);
-var inputArray = ActivityParser(inputFileBuffer);
-console.log('food table: ' + foodEntityTable.name);
-_.each(foodEntityTable.entities, function(value, key) {
-  console.log(value.name + ': ' + key + ', ' + value.value + ', ' + value.duration);
-});
-console.log('exercse table: ' + exerciseEntityTable.name);
-_.each(exerciseEntityTable.entities, function(value, key) {
-  console.log(value.name + ': ' + key + ', ' + value.value + ', ' + value.duration);
-});
-console.log('input log: ');
-_.each(inputArray, function(value) {
-  console.log(new Date(value.timestamp) + ": " + value.type + ", " + value.id);
-});
+var foodEntityTable = EntityTable.FoodTable(fs.readFileSync(args.food));
+var exerciseEntityTable = EntityTable.ExerciseTable(fs.readFileSync(args.exercise));
+var inputArray = ActivityParser(fs.readFileSync(args.input));
 
 var simulation = Simulation(foodEntityTable, exerciseEntityTable, inputArray);
 simulation.runSimulation();
