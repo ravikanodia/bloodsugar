@@ -3,8 +3,12 @@
   "version": "0.0.1",
   "description": "Sample code for a blood sugar tracker",
   "main": "index.js",
+  "directories": {
+    "example": "examples",
+    "test": "test"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "make test"
   },
   "repository": {
     "type": "git",
@@ -20,6 +24,8 @@
     "argparse": "^1.0.9",
     "csv-parse": "^1.2.0",
     "is-number": "^3.0.0",
+    "mocha": "^3.2.0",
+    "should": "^11.2.1",
     "underscore": "^1.8.3"
   }
 }
