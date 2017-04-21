@@ -12,7 +12,6 @@ describe('EntityTable', function() {
         EntityTable.ExerciseTable(fs.readFileSync('./examples/exercise.csv'));
       });
 
-  beforeEach
   it('parses a CSV file', function(done) {
     foodTable.entities[1].name.should.equal("Banana cake, made with sugar");
     foodTable.entities[1].value.should.equal(47);
