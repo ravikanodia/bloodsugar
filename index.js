@@ -34,9 +34,17 @@ var args = argParser.parseArgs();
 
 // readFileSync is not very node-y, but these files are very small and they
 // are required before any work can be done. Async methods are overkill here.
-var foodEntityTable = EntityTable.FoodTable(fs.readFileSync(args.food));
-var exerciseEntityTable = EntityTable.ExerciseTable(fs.readFileSync(args.exercise));
-var inputArray = ActivityParser(fs.readFileSync(args.input));
+// Also, the input parsers are not required to do any kind of work in the
+// filesystem.
+try {
+  var foodEntityTable = EntityTable.FoodTable(fs.readFileSync(args.food));
+  var exerciseEntityTable = EntityTable.ExerciseTable(
+      fs.readFileSync(args.exercise));
+  var inputArray = ActivityParser(fs.readFileSync(args.input));
+} catch (err) {
+  argParser.printHelp();
+  throw err;
+}
 
 var simulation = Simulation(foodEntityTable, exerciseEntityTable, inputArray);
 simulation.runSimulation();
